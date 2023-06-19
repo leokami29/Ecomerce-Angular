@@ -7,6 +7,9 @@ const path = require("path");
 // Import mongoose
 const mongoose = require("mongoose");
 
+const { default: router } = require("./routes/indexRouter");
+
+
 // Conexión a la DB
 mongoose.Promise = global.Promise;
 const dbUrl = "mongodb+srv://Leo:292011Leo@cluster0.kpmvper.mongodb.net/MEAN?retryWrites=true&w=majority";
@@ -32,7 +35,7 @@ app.use(
   })
 );
 app.use(express.static(path.join(__dirname, "public")));
-// app.use('/api', route)
+app.use('/api', router)
 
 // Setear el puerto
 app.set("port", process.env.PORT || 3000);
