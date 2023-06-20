@@ -21,7 +21,7 @@ export default {
       const { _id } = await jwt.verify(token, "ecomerce_udemy");
       console.log(_id)
       const user = models.User.findOne({
-        id: _id,
+        _id: _id,
         state: 1,
       });
       if (user) {

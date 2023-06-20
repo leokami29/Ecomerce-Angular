@@ -30,9 +30,7 @@ export default {
           message: "NO SE ENVIO EL TOKEN",
         });
       }
-      console.log(req.headers.token)
       const response = await token.decode(req.headers.token);
-      console.log(response)
       if (response) {
         if ( response.rol == "admin") {
           next();
