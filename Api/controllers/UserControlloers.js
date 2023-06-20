@@ -18,10 +18,8 @@ export default {
 
   login: async (req, res) => {
     try {
-      const user = await models.User.findOne({
-        email: req.body.email,
-        state: 1,
-      });
+      const user = await models.User.findOne({email: req.body.email, state: 1});
+      console.log(user)
       if (user) {
         //SI ESTA REGISTRADO EN EL SISTEMA
         let compare = await bcrypt.compare(req.body.password, user.password);
@@ -59,6 +57,8 @@ export default {
     }
   },
 
+
+  //Update muestra la constraseña, debe seguir siendo la misma.
   update: async (req, res) => {
     try {
       if (req.files) {
@@ -66,6 +66,9 @@ export default {
         var name = img_path.split("\\");
         var avatar_name = name[2];
         console.log(avatar_name);
+      }
+      if (req.body.password ) {
+        req.body.password = await bcrypt.hash(req.body.password, 10);
       }
       const UserT = await models.User.findByIdAndUpdate(
         {

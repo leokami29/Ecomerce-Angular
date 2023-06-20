@@ -26,7 +26,7 @@ const UserSchema = new Schema({
   password: {
     type: String,
     minlength: [8, "La contraseña debe tener al menos 8 caracteres"],
-    select: false, //para que no se muestre en la respuesta del get
+    // select: false, //para que no se muestre en la respuesta del get
     require: true,
     maxlength: 250,
   },

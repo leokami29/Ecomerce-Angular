@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
-import models from '../models'
+import models from "../models";
 
-export default  {
+export default {
   encode: async (_id, rol, email) => {
     const token = jwt.sign(
       {
@@ -11,7 +11,7 @@ export default  {
       },
       "ecomerce_udemy",
       { expiresIn: "1d" }
-    ); // Agrega una clave secreta y define la expiración del token (1 hora en este ejemplo)
+    ); 
 
     return token;
   },
@@ -19,19 +19,18 @@ export default  {
   decode: async (token) => {
     try {
       const { _id } = await jwt.verify(token, "ecomerce_udemy");
+      console.log(_id)
       const user = models.User.findOne({
         id: _id,
-        state: 1
+        state: 1,
       });
-      //verificar usuario con
-      if (user){
-        return user
-        };
+      if (user) {
+        return user;
+      }
 
-      return null;
+      return false;
     } catch (error) {
-      console.log(error)
-      throw new Error("Token inválido");
+      console.log(error);
     }
   },
 };
